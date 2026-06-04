@@ -10,7 +10,7 @@ export class DashboardPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.header = page.locator('[data-testid="dashboard-header"], .dashboard-header, h1').first();
+    this.header = page.locator('[data-testid="dashboard-header"]').first();
     this.summaryCards = page.locator('[data-testid="summary-card"], .summary-card, .card');
     this.activityFeed = page.locator('[data-testid="activity-feed"], .activity-feed').first();
     this.refreshButton = page.locator('[data-testid="refresh-btn"], button:has-text("Refresh")').first();

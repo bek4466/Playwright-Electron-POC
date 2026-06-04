@@ -12,7 +12,7 @@ export class SettingsPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.header = page.locator('[data-testid="settings-header"], .settings-header, h1').first();
+    this.header = page.locator('[data-testid="settings-header"]').first();
     this.saveButton = page.locator('[data-testid="save-btn"], button:has-text("Save")').first();
     this.cancelButton = page.locator('[data-testid="cancel-btn"], button:has-text("Cancel")').first();
     this.themeSelect = page.locator('[data-testid="theme-select"], select[name="theme"]').first();

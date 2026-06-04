@@ -25,7 +25,7 @@ test.describe('Login — Valid Credentials', () => {
 
 test.describe('Login — Invalid Credentials', () => {
   for (const { username, password, expectedError } of testData.invalidUsers) {
-    test(`shows error: "${expectedError}"`, async ({ electronPage }) => {
+    test(`"${username || 'empty'}":"${password || 'empty'}" → ${expectedError}`, async ({ electronPage }) => {
       test.info().annotations.push({ type: 'feature', description: 'Login Validation' });
 
       const loginPage = new LoginPage(electronPage);

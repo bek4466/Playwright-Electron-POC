@@ -1,0 +1,6 @@
+{
+  "name": "MockApp",
+  "version": "1.0.0",
+  "description": "Mock Electron app for E2E framework testing",
+  "main": "main.js"
+}

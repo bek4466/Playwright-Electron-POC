@@ -17,7 +17,7 @@ export class MainPage extends BasePage {
 
   async isLoaded(): Promise<boolean> {
     try {
-      await this.waitForVisible(this.contentArea, 5_000);
+      await this.waitForVisible(this.navigationMenu, 5_000);
       return true;
     } catch {
       return false;

@@ -3,10 +3,10 @@ import { MainPage } from '../pages/MainPage';
 import testData from '../data/test-data.json';
 
 test.describe('Navigation', () => {
-  test('all nav sections are reachable', async ({ electronPage }) => {
+  test('all nav sections are reachable', async ({ loggedInPage }) => {
     test.info().annotations.push({ type: 'feature', description: 'Navigation' });
 
-    const mainPage = new MainPage(electronPage);
+    const mainPage = new MainPage(loggedInPage);
 
     for (const section of testData.navigation.sections) {
       await test.step(`Navigate to ${section}`, async () => {
@@ -17,11 +17,11 @@ test.describe('Navigation', () => {
   });
 
   for (const section of testData.navigation.sections) {
-    test(`section "${section}" loads content area`, async ({ electronPage }) => {
+    test(`section "${section}" loads content area`, async ({ loggedInPage }) => {
       test.info().annotations.push({ type: 'feature', description: 'Navigation' });
       test.info().annotations.push({ type: 'story', description: section });
 
-      const mainPage = new MainPage(electronPage);
+      const mainPage = new MainPage(loggedInPage);
 
       await test.step(`Navigate to ${section}`, async () => {
         await mainPage.navigateTo(section);

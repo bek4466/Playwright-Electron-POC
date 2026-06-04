@@ -1,5 +1,5 @@
 import { test, expect } from '../fixtures';
-import { MainPage } from '../pages/MainPage';
+import { LoginPage } from '../pages/LoginPage';
 import { ElectronUtils } from '../../src/utils/electron.utils';
 
 test.describe('Smoke Tests', () => {
@@ -12,11 +12,10 @@ test.describe('Smoke Tests', () => {
     });
   });
 
-  test('main window content area loads', async ({ electronPage }) => {
-    const mainPage = new MainPage(electronPage);
-    await test.step('Check main page loaded state', async () => {
-      const loaded = await mainPage.isLoaded();
-      expect(loaded).toBe(true);
+  test('login screen loads on startup', async ({ electronPage }) => {
+    const loginPage = new LoginPage(electronPage);
+    await test.step('Verify login screen is shown', async () => {
+      expect(await loginPage.isLoaded()).toBe(true);
     });
   });
 
@@ -28,7 +27,10 @@ test.describe('Smoke Tests', () => {
     });
   });
 
-  test('single window open on launch', async ({ electronApp }) => {
+  test('single window open on launch', async ({ electronPage, electronApp }) => {
+    await test.step('Verify window is open', () => {
+      expect(electronPage).toBeDefined();
+    });
     await test.step('Verify window count is 1', async () => {
       const count = await ElectronUtils.getWindowCount(electronApp);
       expect(count).toBeGreaterThanOrEqual(1);
