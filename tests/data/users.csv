@@ -1,0 +1,5 @@
+username,password,role,expectedPage
+admin,admin123,admin,Dashboard
+user1,pass1,user,Dashboard
+manager,mgr456,manager,Dashboard
+readonly,read789,readonly,Dashboard

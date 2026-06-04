@@ -1,13 +1,25 @@
 {
   "validUsers": [
-    { "username": "admin", "password": "admin123", "role": "admin" },
-    { "username": "user1", "password": "pass1", "role": "user" }
+    { "username": "admin",    "password": "admin123", "role": "admin",    "expectedPage": "Dashboard" },
+    { "username": "user1",    "password": "pass1",    "role": "user",     "expectedPage": "Dashboard" },
+    { "username": "manager",  "password": "mgr456",   "role": "manager",  "expectedPage": "Dashboard" },
+    { "username": "readonly", "password": "read789",  "role": "readonly", "expectedPage": "Dashboard" }
   ],
   "invalidUsers": [
-    { "username": "invalid", "password": "wrong", "expectedError": "Invalid credentials" },
-    { "username": "", "password": "", "expectedError": "Username is required" }
+    { "username": "invalid", "password": "wrong",   "expectedError": "Invalid credentials" },
+    { "username": "",        "password": "",         "expectedError": "Username is required" },
+    { "username": "admin",   "password": "",         "expectedError": "Password is required" },
+    { "username": "",        "password": "admin123", "expectedError": "Username is required" }
   ],
   "navigation": {
     "sections": ["Dashboard", "Settings", "Reports", "Users"]
+  },
+  "settings": {
+    "themes": ["light", "dark", "system"],
+    "languages": ["en", "es", "fr", "de"]
+  },
+  "search": {
+    "queries": ["admin", "user", "report", "2024"],
+    "emptyQuery": "zzz_no_results_xyz"
   }
 }
