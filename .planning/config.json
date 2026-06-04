@@ -1,0 +1,46 @@
+{
+  "project": {
+    "name": "Playwright-Electron-POC",
+    "description": "E2E testing framework for Electron applications using Playwright",
+    "type": "testing-framework",
+    "priority": "urgent"
+  },
+  "team": {
+    "size": "multiple",
+    "requiresDocumentation": true,
+    "requiresOnboarding": true
+  },
+  "workflow": {
+    "research": false,
+    "requirementsApproval": false,
+    "roadmapApproval": false,
+    "autoExecute": false
+  },
+  "technology": {
+    "language": "typescript",
+    "runtime": "nodejs",
+    "framework": "playwright",
+    "targetPlatform": "windows",
+    "targetApp": "electron-v41"
+  },
+  "deliverables": {
+    "includeTests": true,
+    "includeCI": true,
+    "includeDocumentation": true,
+    "includeArchitectureDocs": true
+  },
+  "timeline": {
+    "mvpWeeks": 4,
+    "phases": 4,
+    "urgency": "high"
+  },
+  "reporting": {
+    "framework": "allure",
+    "fallback": "playwright-native"
+  },
+  "execution": {
+    "environments": ["local", "ci-cd"],
+    "ciProvider": "github-actions",
+    "osRequirement": "windows-only"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "validUsers": [
+    { "username": "admin", "password": "admin123", "role": "admin" },
+    { "username": "user1", "password": "pass1", "role": "user" }
+  ],
+  "invalidUsers": [
+    { "username": "invalid", "password": "wrong", "expectedError": "Invalid credentials" },
+    { "username": "", "password": "", "expectedError": "Username is required" }
+  ],
+  "navigation": {
+    "sections": ["Dashboard", "Settings", "Reports", "Users"]
+  }
+}
