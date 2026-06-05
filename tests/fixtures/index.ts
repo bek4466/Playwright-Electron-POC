@@ -1,5 +1,6 @@
 import { test as base } from '@playwright/test';
 import { ElectronApplication, Page, _electron as electron } from 'playwright';
+import { allure } from 'allure-playwright';
 import { AppConfig } from '../../src/config/app.config';
 import { Logger } from '../../src/utils/logger';
 
@@ -11,6 +12,15 @@ type ElectronFixtures = {
 };
 
 const logger = new Logger('Fixture');
+
+async function attachPageScreenshot(page: Page, label: string): Promise<void> {
+  try {
+    const buf = await page.screenshot({ fullPage: true });
+    await allure.attachment(label, buf, 'image/png');
+  } catch {
+    // page may already be closed
+  }
+}
 
 export const test = base.extend<ElectronFixtures>({
   electronApp: async ({}, use) => {
@@ -27,8 +37,23 @@ export const test = base.extend<ElectronFixtures>({
 
   electronPage: async ({ electronApp }, use) => {
     const window = await electronApp.firstWindow();
+    const consoleLogs: string[] = [];
+    window.on('console', msg => consoleLogs.push(`[${msg.type().toUpperCase()}] ${msg.text()}`));
+
     await window.waitForLoadState('domcontentloaded');
     await use(window);
+
+    if (consoleLogs.length > 0) {
+      await allure.attachment('Console Logs', consoleLogs.join('\n'), 'text/plain');
+    }
+    await attachPageScreenshot(window, 'Final State');
+    // Note: video recording is not supported for Electron apps in Playwright.
+    // Use the Playwright trace viewer (Traces tab) for step-by-step visual replay.
+    await allure.attachment(
+      'Video — Not Available',
+      'Playwright video recording is not supported for Electron apps.\nUse the Playwright HTML report trace viewer instead:\n  npx playwright show-report',
+      'text/plain',
+    );
   },
 
   secondaryWindow: async ({ electronApp }, use) => {
@@ -47,6 +72,7 @@ export const test = base.extend<ElectronFixtures>({
       await electronPage.locator('[data-testid="nav-menu"]').waitFor({ state: 'visible', timeout: 5_000 });
     }
     await use(electronPage);
+    await attachPageScreenshot(electronPage, 'Post-Test State');
   },
 });
 
