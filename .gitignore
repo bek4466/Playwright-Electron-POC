@@ -34,3 +34,6 @@ monocart-report/
 
 # Claude Code
 .claude/
+
+# Planning artifacts
+.planning/
