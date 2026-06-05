@@ -13,7 +13,8 @@
 ## Table of Contents
 
 1. [Executive Summary](#1-executive-summary)
-2. [Technology Stack](#2-technology-stack)
+2. [Pros & Cons](#pros--cons)
+3. [Technology Stack](#2-technology-stack)
 3. [Electron Integration Model](#3-electron-integration-model)
 4. [Framework Architecture](#4-framework-architecture)
 5. [Configuration Complexity](#5-configuration-complexity)
@@ -49,6 +50,33 @@ Both frameworks have been evaluated against the same Electron application target
 | Migration risk from current state | Low (already exists) | POC validated | Playwright |
 
 > **Recommendation:** Migrate to Playwright. See [Section 15](#15-decision--recommendation).
+
+---
+
+## Pros & Cons
+
+### WebdriverIO
+
+| ✅ Pros | ❌ Cons |
+|---|---|
+| Mature ecosystem (10+ years, large community) | Requires ChromeDriver — version must match Electron exactly |
+| First-class Cucumber/Gherkin BDD support | No native Electron main-process access |
+| Strong multi-browser web testing capabilities | 3–4 config files + multiple env vars to run a single test |
+| Familiar to teams coming from Selenium | No built-in trace, video, or auto-retry assertions |
+| Rich plugin ecosystem (`@wdio/*` packages) | Locators split from actions — high file navigation overhead |
+| Watch mode for TDD loops | Driver version drift breaks CI silently |
+
+### Playwright
+
+| ✅ Pros | ❌ Cons |
+|---|---|
+| Native Electron API — no ChromeDriver, no version pinning | Smaller ecosystem than WDIO (younger project) |
+| Direct main-process access via `electronApp.evaluate()` | No native Cucumber/Gherkin support |
+| Single config file, zero env vars to get started | Video capture not supported for Electron apps |
+| Built-in auto-retry `expect`, fixtures, trace, screenshot | Migration effort from existing WDIO suite |
+| UI mode + Trace Viewer dramatically speed up debugging | |
+| Monocart: trend charts, slow/flaky detection, tag colours | |
+| `process.env.CI` auto-configures retries and strict mode | |
 
 ---
 
